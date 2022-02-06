@@ -29,6 +29,7 @@
             let form = document.getElementById("keyword_upload_form");
             let keyword_list = document.getElementById("keyword_list");
             let keyword_blacklist = document.getElementById("keyword_blacklist");
+            var test = null; 
 
             form.addEventListener("submit", (e) => {
                 e.preventDefault();                
@@ -41,38 +42,38 @@
 
                 keyword_reader.onload = function (e) {
                     const text = e.target.result;  // the CSV content as string
-                    console.log("keyword_list event happening");
-                   // const keyword_list = JSON.stringify(csvToArray(text));
+                 //   console.log("keyword_list event happening");
 
                     const keyword_list = csv2array(text);
-                   console.log(keyword_list)
+                 //  console.log(keyword_list)
 
-                };
 
-                blacklist_reader.onload = function (e) {
-                    const text = e.target.result;  // the CSV content as string
-                   // console.log("blacklist event happening");
-                 //   const blacklist = JSON.stringify(csvToArray(text));
 
-                    // console.log("2")
-                    // console.log(blacklist)
-                };
+                            blacklist_reader.onload = function (e) {
+                                const text = e.target.result;  // the CSV content as string
+                            //   console.log("blacklist_reader event happening");
+
+                                const blacklist = csv2array(text);
+                            //   console.log(blacklist)
+
+                         
+                            console.log(keyword_list)
+                            console.log(blacklist)
+
+                            }; // end blacklist reader
+
+                            blacklist_reader.readAsText(keyword_blacklist_upload);
+
+                }; // end keyword reader
+
+
 
                 
               
                 keyword_reader.readAsText(keyword_list_upload);
-                blacklist_reader.readAsText(keyword_blacklist_upload);
-                // console.log("/////////////////////////")
-                // reader.readAsText(keyword_blacklist_upload);
-
-                // console.log(e.target.result)
-                // console.log(reader)
-                // reader.onload = function (evt) {
-                //     document.getElementById("fileContents").innerHTML = evt.target.result;
-                // }
-                // reader.onerror = function (evt) {
-                //     document.getElementById("fileContents").innerHTML = "error reading file";
-                // }
+                
+               
+               
             })
         </script>
     </body>
