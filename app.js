@@ -1,13 +1,17 @@
 // Converts a keyword list (as a csv string) into an array
 function csv2array(input){
     var data = [];
-    var rows = input.slice(input.indexOf("\n") + 1).split("\n");
+   // var rows = input.slice(input.indexOf("\n")).split("\n");
+   var rows = input.split("\n");
+
+    // console.log("Inside csv2array");
+    // console.log(rows)
 
     rows.forEach(element => {
 
         if (element === ""){
             // Skip empty entries
-          //  return;            
+            return;            
         }
 
         data.push(element)
@@ -40,6 +44,43 @@ function is_fresh_input(str, arr){
     }
 
 }
+
+
+
+// Parse through two arrays and remove any matches across both
+// Also remove any entries from array 1 that contain those from array 2
+function remove_exceptions(main_list, blacklist){
+    let output = [];
+
+    console.log("Inside remove_exceptions");
+    // console.log(blacklist);
+    // console.log(main_list);
+
+    main_list.forEach( word => {
+        
+        blacklist.forEach( exception => {
+
+          //  console.log(exception)
+
+            if ( word.includes(exception) ){
+             //   console.log(exception)
+                return;
+                
+            }
+
+            output.push(word);
+        }); // Inner loop
+
+        
+
+    }); // Outer loop
+
+   let final_output = remove_duplicates(output)
+
+    return final_output.values;
+
+}
+
 
 // Parse through an array of strings and remove duplicates
 // Returns an object containing the number of duplicates removed and the resulting array
