@@ -104,12 +104,17 @@
             paste_form.addEventListener("submit", (e) => {
                 e.preventDefault();
 
-                var keyword_list = e.target.paste_keyword_list.value;
-                var blacklist = e.target.paste_blacklist.value;
+                var keyword_list = csv2array(e.target.paste_keyword_list.value);
+                var blacklist = csv2array(e.target.paste_blacklist.value);
 
-                console.log("keyword list:")
-                console.log(keyword_list);
-                console.log(blacklist);
+                console.log("Before:")
+                console.log(keyword_list)
+
+                var unique_kws = remove_duplicates(keyword_list).values;
+
+                console.log(unique_kws)
+               
+                
 
             })
 

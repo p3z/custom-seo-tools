@@ -20,12 +20,12 @@ function csv2array(input){
     // console.log("Before removing duplicates:");
     // console.log(data);
 
-    var output = remove_duplicates(data);
+   // var output = remove_duplicates(data);
 
     // console.log("After removing duplicates:");
     // console.log(output.values);
 
-    return output.values;
+    return data;
 }
 
 
