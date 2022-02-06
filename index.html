@@ -19,6 +19,19 @@
             <input type="submit" value="Submit">
         </form>
 
+        <br>
+        <br>
+
+        <form action="#" id ="paste_form">
+            <textarea id="paste_keyword_list" placeholder="Paste your keyword list here..." rows="10" cols="40"></textarea>
+            <br>
+            <textarea id="paste_blacklist" placeholder="Paste your blacklist here..." rows="10" cols="40"></textarea>
+            <br>
+            <input type="submit" value="Submit">
+
+        </form>
+        
+
 
 
 
@@ -26,12 +39,12 @@
         <script src="./app.js"></script>
 
         <script>
-            let form = document.getElementById("keyword_upload_form");
+            let keyword_upload_form = document.getElementById("keyword_upload_form");
             let keyword_list = document.getElementById("keyword_list");
             let keyword_blacklist = document.getElementById("keyword_blacklist");
             var test = null; 
 
-            form.addEventListener("submit", (e) => {
+            keyword_upload_form.addEventListener("submit", (e) => {
                 e.preventDefault();                
                 
                 let keyword_list_upload = keyword_list.files[0];
@@ -80,6 +93,28 @@
                
                
             })
+        </script>
+
+        <script>
+                     
+            var paste_form = document.getElementById('paste_form');
+            var paste_keyword_list = document.getElementById('paste_keyword_list');
+            var paste_blacklist = document.getElementById('paste_blacklist');
+
+            paste_form.addEventListener("submit", (e) => {
+                e.preventDefault();
+
+                var keyword_list = e.target.paste_keyword_list.value;
+                var blacklist = e.target.paste_blacklist.value;
+
+                console.log("keyword list:")
+                console.log(keyword_list);
+                console.log(blacklist);
+
+            })
+
+
+
         </script>
     </body>
 </html>
