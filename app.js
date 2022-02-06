@@ -51,33 +51,49 @@ function is_fresh_input(str, arr){
 // Also remove any entries from array 1 that contain those from array 2
 function remove_exceptions(main_list, blacklist){
     let output = [];
+    let exceptions = [];
 
     console.log("Inside remove_exceptions");
     // console.log(blacklist);
     // console.log(main_list);
 
-    main_list.forEach( word => {
-        
-        blacklist.forEach( exception => {
+    loop1:
+    for(let i = 0; i < main_list.length; i++){
 
-          //  console.log(exception)
+        var word  = main_list[i];
 
+        loop2:
+        for(let j = 0; j < blacklist.length; j++){
+
+            var exception = blacklist[i];
+
+            // If it's in the blacklist, skip this word
             if ( word.includes(exception) ){
-             //   console.log(exception)
-                return;
-                
+                exceptions.push(exception);
+                break loop1;
             }
 
-            output.push(word);
-        }); // Inner loop
+            // If it's already in the output array, skip this word
+            if( output.includes(word) ){
+                continue loop1;
+            }
 
+            // If here, then add word shd be added to output
+            output.push(word);
+            console.log("Word added");         
+            
+
+        } // Inner loop
         
 
-    }); // Outer loop
+    }; // Outer loop
+
+    console.log(exceptions)
+    console.log(output)
 
    let final_output = remove_duplicates(output)
 
-    return final_output.values;
+  //  return final_output.values;
 
 }
 
