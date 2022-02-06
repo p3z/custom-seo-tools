@@ -1,0 +1,79 @@
+<html>
+    <head></head>
+    <body>
+        <h1></h1>
+
+        <form action="#" id="keyword_upload_form">
+            <label for="keyword_list">
+                Upload a csv of keywords
+            </label>
+            <input type="file" name="keyword_list" id="keyword_list" accept=".csv">
+
+            <br>
+
+            <label for="keyword_blacklist">
+                Upload a csv of keywords to exclude
+            </label>
+            <input type="file" name="keyword_blacklist" id="keyword_blacklist" accept=".csv">
+            <br>
+            <input type="submit" value="Submit">
+        </form>
+
+
+
+
+
+        <script src="./app.js"></script>
+
+        <script>
+            let form = document.getElementById("keyword_upload_form");
+            let keyword_list = document.getElementById("keyword_list");
+            let keyword_blacklist = document.getElementById("keyword_blacklist");
+
+            form.addEventListener("submit", (e) => {
+                e.preventDefault();                
+                
+                let keyword_list_upload = keyword_list.files[0];
+                let keyword_blacklist_upload = keyword_blacklist.files[0];
+
+                var keyword_reader = new FileReader();
+                var blacklist_reader = new FileReader();
+
+                keyword_reader.onload = function (e) {
+                    const text = e.target.result;  // the CSV content as string
+                    console.log("keyword_list event happening");
+                   // const keyword_list = JSON.stringify(csvToArray(text));
+
+                    const keyword_list = csv2array(text);
+                   console.log(keyword_list)
+
+                };
+
+                blacklist_reader.onload = function (e) {
+                    const text = e.target.result;  // the CSV content as string
+                   // console.log("blacklist event happening");
+                 //   const blacklist = JSON.stringify(csvToArray(text));
+
+                    // console.log("2")
+                    // console.log(blacklist)
+                };
+
+                
+              
+                keyword_reader.readAsText(keyword_list_upload);
+                blacklist_reader.readAsText(keyword_blacklist_upload);
+                // console.log("/////////////////////////")
+                // reader.readAsText(keyword_blacklist_upload);
+
+                // console.log(e.target.result)
+                // console.log(reader)
+                // reader.onload = function (evt) {
+                //     document.getElementById("fileContents").innerHTML = evt.target.result;
+                // }
+                // reader.onerror = function (evt) {
+                //     document.getElementById("fileContents").innerHTML = "error reading file";
+                // }
+            })
+        </script>
+    </body>
+</html>
