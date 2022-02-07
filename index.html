@@ -99,7 +99,7 @@ body {
             </div>
 
             <div class="right content">
-                <h3>Output</h3>
+                <h3>Output: <span id="output_counter">0</span> words</h3>
                 <textarea id="output_catcher" placeholder="Output lands here..." rows="25" cols="60"></textarea>
             </div>
           </div> <!--end of container -->
@@ -180,6 +180,7 @@ body {
            var paste_blacklist = document.getElementById('paste_blacklist');
 
            var output_catcher = document.getElementById('output_catcher');
+           var output_counter = document.getElementById('output_counter');
 
             paste_form.addEventListener("submit", (e) => {
                 e.preventDefault();
@@ -221,7 +222,10 @@ body {
                     output_catcher.value += word;
                     output_catcher.value += "\n";
                 })
-                console.log(output)
+               
+               //console.log(output)
+
+               output_counter.textContent = output.length;
                 
 
             })
