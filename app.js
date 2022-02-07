@@ -131,6 +131,9 @@ function remove_duplicates(input){
 // set matches_only to true if you want only exact matches
 function inList(keyword, blacklist = [], matches_only = false){
 
+    // console.log("Inside inlist")
+    // console.log(matches_only)
+
     // Loop through the array    
     for(let i = 0; i < blacklist.length; i++){
 
