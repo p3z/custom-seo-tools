@@ -3,7 +3,7 @@
     <body>
         <h1></h1>
 
-        <form action="#" id="keyword_upload_form">
+        <!-- <form action="#" id="keyword_upload_form">
             <label for="keyword_list">
                 Upload a csv of keywords
             </label>
@@ -17,14 +17,16 @@
             <input type="file" name="keyword_blacklist" id="keyword_blacklist" accept=".csv">
             <br>
             <input type="submit" value="Submit">
-        </form>
+        </form> -->
 
         <br>
         <br>
 
         <form action="#" id ="paste_form">
+            <h3>Keyword list</h3>
             <textarea id="paste_keyword_list" placeholder="Paste your keyword list here..." rows="10" cols="40"></textarea>
             <br>
+            <h3>Blacklist</h3>
             <textarea id="paste_blacklist" placeholder="Paste your blacklist here..." rows="10" cols="40"></textarea>
             <br>
             <input type="submit" value="Submit">
@@ -38,7 +40,7 @@
 
         <script src="./app.js"></script>
 
-        <script>
+        <!-- <script>
             let keyword_upload_form = document.getElementById("keyword_upload_form");
             let keyword_list = document.getElementById("keyword_list");
             let keyword_blacklist = document.getElementById("keyword_blacklist");
@@ -93,13 +95,13 @@
                
                
             })
-        </script>
+        </script> -->
 
         <script>
                      
             var paste_form = document.getElementById('paste_form');
             var paste_keyword_list = document.getElementById('paste_keyword_list');
-            var paste_blacklist = document.getElementById('paste_blacklist');
+           var paste_blacklist = document.getElementById('paste_blacklist');
 
             paste_form.addEventListener("submit", (e) => {
                 e.preventDefault();
@@ -107,13 +109,30 @@
                 var keyword_list = csv2array(e.target.paste_keyword_list.value);
                 var blacklist = csv2array(e.target.paste_blacklist.value);
 
-                console.log("Before:")
-                console.log(keyword_list)
+                // console.log("Before:")
+                // console.log(keyword_list)
 
                 var unique_kws = remove_duplicates(keyword_list).values;
 
-                console.log(unique_kws)
+        
+
+                
+                var output = [];
+
+                // Loop through the keyword list and check the values against the blacklist
+                unique_kws.forEach( word => {
+                     var is_blackisted_word = inList(word, blacklist,true );
+
+                    if(!is_blackisted_word){
+                        output.push(word);
+                    }
+
+                    
+
+                });
                
+
+                console.log(output)
                 
 
             })

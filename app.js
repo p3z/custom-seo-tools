@@ -126,3 +126,41 @@ function remove_duplicates(input){
     }
     
 }
+
+// Check if value is in array, return true if so, false if not
+// set matches_only to true if you want only exact matches
+function inList(keyword, blacklist = [], matches_only = false){
+
+    // Loop through the array    
+    for(let i = 0; i < blacklist.length; i++){
+
+        let black_word = blacklist[i];
+
+        
+
+       
+        if(matches_only){
+
+            if( black_word === keyword ){
+
+                // If match, return true
+                return true;
+
+            }
+
+        } else {
+            
+            // Check if entry contains current value
+            if( keyword.indexOf(black_word) != -1){
+
+                // If match, return true
+                return true;
+            }
+
+        }
+
+    };
+
+    return false;
+
+}
