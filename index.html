@@ -47,6 +47,8 @@
         </form>
         
 
+        <h3>Output</h3>
+        <textarea id="output_catcher" placeholder="Output lands here..." rows="10" cols="40"></textarea>
 
 
 
@@ -112,9 +114,11 @@
 
         <script>
                      
-            var paste_form = document.getElementById('paste_form');
-            var paste_keyword_list = document.getElementById('paste_keyword_list');
+           var paste_form = document.getElementById('paste_form');
+           var paste_keyword_list = document.getElementById('paste_keyword_list');
            var paste_blacklist = document.getElementById('paste_blacklist');
+
+           var output_catcher = document.getElementById('output_catcher');
 
             paste_form.addEventListener("submit", (e) => {
                 e.preventDefault();
@@ -138,7 +142,7 @@
 
                    // var is_blackisted_word = inList(word, blacklist, use_strict_mode );
 
-                    var is_blackisted_word = inList(word, blacklist, use_strict_mode );
+                    var is_blackisted_word = inList(word, blacklist, true );
 
                     if(!is_blackisted_word){
                         output.push(word);
@@ -148,7 +152,14 @@
 
                 });
                
+                // Reset the output 
+                output_catcher.value = "";
 
+                // Loop through output and print it to screen
+                output.forEach( word => {
+                    output_catcher.value += word;
+                    output_catcher.value += "\n";
+                })
                 console.log(output)
                 
 
