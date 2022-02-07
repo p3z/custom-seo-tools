@@ -73,7 +73,7 @@ body {
               <div class="content">
 
                 <form action="#" id ="paste_form">
-                    <h3>Keyword list</h3>
+                    <h3>Keyword list: <span id="input_counter">0</span> words</h3>
                     <textarea id="paste_keyword_list" placeholder="Paste your keyword list here..." rows="10" cols="40"></textarea>
                     <br>
                     <h3>Blacklist</h3>
@@ -181,6 +181,9 @@ body {
 
            var output_catcher = document.getElementById('output_catcher');
            var output_counter = document.getElementById('output_counter');
+           var input_counter = document.getElementById('output_counter');
+
+           
 
             paste_form.addEventListener("submit", (e) => {
                 e.preventDefault();
@@ -203,8 +206,8 @@ body {
                     
 
                    // var is_blackisted_word = inList(word, blacklist, use_strict_mode );
-
-                    var is_blackisted_word = inList(word, blacklist );
+                   // For some reason the above doesnt work even though the use_strict_mode variable is correct whether true or false, the output is never what you expect
+                    var is_blackisted_word = inList(word, blacklist);
 
                     if(!is_blackisted_word){
                         output.push(word);
