@@ -1,9 +1,55 @@
 <html>
-    <head></head>
+    <head>
+
+        <style>
+
+body {
+  height: 100vh;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: radial-gradient(#666, #222);
+}
+
+.container {
+    width: 100%;
+    height: 100%;
+}
+
+    
+
+.left {
+  background: #1f9af0;
+  width: 50%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding-left: 5%;
+}
+
+.right {
+  background: red;
+  width: 50%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  padding-left: 5%;
+}
+
+
+
+        </style>
+
+    </head>
     <body>
-        <h1></h1>
+      
 
         <!-- <form action="#" id="keyword_upload_form">
+
+            
             <label for="keyword_list">
                 Upload a csv of keywords
             </label>
@@ -19,36 +65,51 @@
             <input type="submit" value="Submit">
         </form> -->
 
+
+        <div class="container">
+           
+         
+            <div class="left content">
+              <div class="content">
+
+                <form action="#" id ="paste_form">
+                    <h3>Keyword list</h3>
+                    <textarea id="paste_keyword_list" placeholder="Paste your keyword list here..." rows="10" cols="40"></textarea>
+                    <br>
+                    <h3>Blacklist</h3>
+                    <textarea id="paste_blacklist" placeholder="Paste your blacklist here..." rows="10" cols="40"></textarea>
+                    <br>
+                    <br>
+                      
+                    <div>
+                        <input type="radio" id="loose_mode" name="match_mode" value="false" checked>
+                        <label for="loose_mode">Loose mode (Remove all keywords containing a match)</label>
+                    </div>
+        
+                    <div>
+                        <input type="radio" id="strict_mode" name="match_mode" value="true">
+                        <label for="strict_mode">Strict mode (Remove only explicit keyword matches)</label>
+                    </div>
+        
+                     <br>
+                    <input type="submit" value="Submit">
+        
+                </form>
+                </div> <!-- end of content -->
+            </div>
+
+            <div class="right content">
+                <h3>Output</h3>
+                <textarea id="output_catcher" placeholder="Output lands here..." rows="25" cols="60"></textarea>
+            </div>
+          </div> <!--end of container -->
         <br>
         <br>
 
-        <form action="#" id ="paste_form">
-            <h3>Keyword list</h3>
-            <textarea id="paste_keyword_list" placeholder="Paste your keyword list here..." rows="10" cols="40"></textarea>
-            <br>
-            <h3>Blacklist</h3>
-            <textarea id="paste_blacklist" placeholder="Paste your blacklist here..." rows="10" cols="40"></textarea>
-            <br>
-            <br>
-              
-            <div>
-                <input type="radio" id="loose_mode" name="match_mode" value="false" checked>
-                <label for="loose_mode">Loose mode (Remove all keywords containing a match)</label>
-            </div>
-
-            <div>
-                <input type="radio" id="strict_mode" name="match_mode" value="true">
-                <label for="strict_mode">Strict mode (Remove only explicit keyword matches)</label>
-            </div>
-
-             <br>
-            <input type="submit" value="Submit">
-
-        </form>
+       
         
 
-        <h3>Output</h3>
-        <textarea id="output_catcher" placeholder="Output lands here..." rows="10" cols="40"></textarea>
+      
 
 
 
