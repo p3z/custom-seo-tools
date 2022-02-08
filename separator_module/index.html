@@ -210,8 +210,8 @@ body {
                 var catchlist = csv2array(e.target.paste_catchlist.value);
                 var use_strict_mode = e.target.match_mode.value;
 
-                // console.log("Mode is:")
-                // console.log(use_strict_mode)
+                console.log("Mode is:")
+                console.log(use_strict_mode)
                 
 
                 var unique_kws = remove_duplicates(keyword_list).values;
@@ -224,6 +224,7 @@ body {
                 unique_kws.forEach( word => {
                     
                     var is_matchlist_word = inList(word, catchlist, use_strict_mode);
+                    // Dont get catch list and match list mixed up
 
                     if(is_matchlist_word){
                         matchlist_output.push(word);
@@ -235,11 +236,11 @@ body {
 
                 });
                
-                // Reset the output 
+                // Reset the outputs
                 output_match_list.value = "";
                 output_remainder_list.value = "";
 
-                // Loop through both outputs and print it to screen
+                // Loop through both outputs and print to screen
                 matchlist_output.forEach( word => {
                     output_match_list.value += word;
                     output_match_list.value += "\n";
@@ -250,7 +251,7 @@ body {
                     output_remainder_list.value += "\n";
                 })
                
-                
+                // Update the counters
                 match_list_counter.textContent = matchlist_output.length;
                 remainder_counter.textContent = remainderlist_output.length;
                 

@@ -141,6 +141,7 @@ function inList(keyword, blacklist = [], matches_only = false){
        
         if(matches_only == 1){
             console.log("strict mode ran")
+            
             if( black_word === keyword ){
                 
                 // If match, return true
