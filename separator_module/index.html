@@ -1,0 +1,242 @@
+<html>
+    <head>
+
+        <style>
+
+body {
+  height: 100vh;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: radial-gradient(#666, #222);
+}
+
+.container {
+    width: 100%;
+    height: 100%;
+}
+
+    
+
+.left {
+  background: #1f9af0;
+  width: 50%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding-left: 5%;
+}
+
+.right {
+  background: red;
+  width: 50%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  padding-left: 5%;
+}
+
+
+
+        </style>
+
+    </head>
+    <body>
+      
+
+        <!-- <form action="#" id="keyword_upload_form">
+
+            
+            <label for="keyword_list">
+                Upload a csv of keywords
+            </label>
+            <input type="file" name="keyword_list" id="keyword_list" accept=".csv">
+
+            <br>
+
+            <label for="keyword_blacklist">
+                Upload a csv of keywords to exclude
+            </label>
+            <input type="file" name="keyword_blacklist" id="keyword_blacklist" accept=".csv">
+            <br>
+            <input type="submit" value="Submit">
+        </form> -->
+
+
+        <div class="container">
+           
+         
+            <div class="left content">
+              <div class="content">
+
+                <form action="#" id ="paste_form">
+                    <h3>Keyword list <!-- <span id="input_counter">0</span> words --></h3>
+                    <textarea id="paste_keyword_list" placeholder="Paste your keyword list here..." rows="10" cols="40"></textarea>
+                    <br>
+                    <h3>Exclude</h3>
+                    <textarea id="paste_blacklist" placeholder="Paste your blacklist here..." rows="10" cols="40"></textarea>
+                    <br>
+                    <br>
+                      
+                    <div>
+                        <input type="radio" id="loose_mode" name="match_mode" value="0" checked>
+                        <label for="loose_mode">Loose mode (Remove all keywords containing a match)</label>
+                    </div>
+        
+                    <div>
+                        <input type="radio" id="strict_mode" name="match_mode" value="1">
+                        <label for="strict_mode">Strict mode (Remove only explicit keyword matches)</label>
+                    </div>
+        
+                     <br>
+                    <input type="submit" value="Submit">
+        
+                </form>
+                </div> <!-- end of content -->
+            </div>
+
+            <div class="right content">
+                <h3>Output: <span id="output_counter">0</span> words</h3>
+                <textarea id="output_catcher" placeholder="Output lands here..." rows="25" cols="60"></textarea>
+            </div>
+          </div> <!--end of container -->
+        <br>
+        <br>
+
+       
+        
+
+      
+
+
+
+
+        <script src="./app.js"></script>
+
+        <!-- <script>
+            let keyword_upload_form = document.getElementById("keyword_upload_form");
+            let keyword_list = document.getElementById("keyword_list");
+            let keyword_blacklist = document.getElementById("keyword_blacklist");
+            var test = null; 
+
+            keyword_upload_form.addEventListener("submit", (e) => {
+                e.preventDefault();                
+                
+                let keyword_list_upload = keyword_list.files[0];
+                let keyword_blacklist_upload = keyword_blacklist.files[0];
+
+                var keyword_reader = new FileReader();
+                var blacklist_reader = new FileReader();
+
+                keyword_reader.onload = function (e) {
+                    const text = e.target.result;  // the CSV content as string
+                 //   console.log("keyword_list event happening");
+
+                    const keyword_list = csv2array(text);
+                 //  console.log(keyword_list)
+
+
+
+                            blacklist_reader.onload = function (e) {
+                                const text = e.target.result;  // the CSV content as string
+                            //   console.log("blacklist_reader event happening");
+
+                                const blacklist = csv2array(text);
+                            //   console.log(blacklist)
+
+                         
+                            // console.log(keyword_list)
+                            // console.log(blacklist)
+
+                            var test = remove_exceptions(keyword_list, blacklist);
+
+                            // console.log("END");
+                            // console.log(test)
+
+                            }; // end blacklist reader
+
+                            blacklist_reader.readAsText(keyword_blacklist_upload);
+
+                }; // end keyword reader
+
+
+
+                
+              
+                keyword_reader.readAsText(keyword_list_upload);
+                
+               
+               
+            })
+        </script> -->
+
+        <script>
+            
+           // Form elements
+           var paste_form = document.getElementById('paste_form');
+           var paste_keyword_list = document.getElementById('paste_keyword_list');
+           var paste_blacklist = document.getElementById('paste_blacklist');
+
+           // Display elements
+           var output_catcher = document.getElementById('output_catcher');
+           var output_counter = document.getElementById('output_counter');
+           var input_counter = document.getElementById('output_counter');
+
+           
+
+            paste_form.addEventListener("submit", (e) => {
+                e.preventDefault();
+
+                var keyword_list = csv2array(e.target.paste_keyword_list.value);
+                var blacklist = csv2array(e.target.paste_blacklist.value);
+                var use_strict_mode = e.target.match_mode.value;
+
+                // console.log("Mode is:")
+                // console.log(use_strict_mode)
+                
+
+                var unique_kws = remove_duplicates(keyword_list).values;
+
+                var output = [];
+                console.log(output)
+
+                // Loop through the keyword list and check the values against the blacklist
+                unique_kws.forEach( word => {
+                    
+
+                   // var is_blackisted_word = inList(word, blacklist, use_strict_mode );
+                   // For some reason the above doesnt work even though the use_strict_mode variable is correct whether true or false, the output is never what you expect
+                    var is_blackisted_word = inList(word, blacklist, use_strict_mode);
+
+                    if(!is_blackisted_word){
+                        output.push(word);
+                    }
+
+                    
+
+                });
+               
+                // Reset the output 
+                output_catcher.value = "";
+
+                // Loop through output and print it to screen
+                output.forEach( word => {
+                    output_catcher.value += word;
+                    output_catcher.value += "\n";
+                })
+               
+               //console.log(output)
+
+               output_counter.textContent = output.length;
+                
+
+            })
+
+
+
+        </script>
+    </body>
+</html>

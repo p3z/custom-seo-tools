@@ -1,10 +1,17 @@
 # custom-seo-tools
 
-## Keyword parser
-Parse through a simple csv of keywords and do the following:
+## Filter module
+Parse through a list of keywords and do the following:
 - remove duplicates
 - remove empty rows
-- remove any specified in a separate csv as a blacklist
-- convert back to csv and send to user as download
+- remove any specified in a blacklist
+- convert back to csv and send to user as download (to be done)
 
 This will enable user signficantly reduce time requirement for keyword research.
+
+## Seperator module
+Parse through a list of keywords and do the following:
+- remove duplicates
+- remove empty rows
+- separate the items from keyword list from those in the second list and output both lists
+- convert back to csv and send to user as download
