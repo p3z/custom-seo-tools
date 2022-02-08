@@ -106,12 +106,12 @@ body {
 
             <div class="right content">
                 <div class="output_list" >
-                    <h3>Matching cases: <span id="output_counter">0</span> words</h3>
+                    <h3>Matching cases: <span id="match_list_counter">0</span> words</h3>
                 <textarea id="output_match_list"  placeholder="Matching cases land here..." rows="25" cols="30"></textarea>
                 </div>
 
                 <div class="output_list">
-                    <h3>Remainder: <span id="output_counter">0</span> words</h3>
+                    <h3>Remainder: <span id="remainder_counter">0</span> words</h3>
                     <textarea id="output_remainder_list" placeholder="Remainder of keywords lands here..." rows="25" cols="30"></textarea>
                 </div>
                 
@@ -198,8 +198,8 @@ body {
            // Display elements
            var output_match_list = document.getElementById('output_match_list');
            var output_remainder_list = document.getElementById('output_remainder_list');
-       //    var output_counter = document.getElementById('output_counter');
-        //   var input_counter = document.getElementById('output_counter');
+           var match_list_counter = document.getElementById('match_list_counter');
+           var remainder_counter = document.getElementById('remainder_counter');
 
            
 
@@ -250,9 +250,10 @@ body {
                     output_remainder_list.value += "\n";
                 })
                
-               //console.log(output)
-
-          //     output_counter.textContent = output.length;
+                
+                match_list_counter.textContent = matchlist_output.length;
+                remainder_counter.textContent = remainderlist_output.length;
+                
                 
 
             })
