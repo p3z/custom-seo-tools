@@ -37,6 +37,12 @@ body {
   top: 0;
   left: 50%;
   padding-left: 5%;
+  display: flex;
+  flex-direction: horizontal;
+}
+
+.output_list{
+    margin: 30px;
 }
 
 
@@ -76,7 +82,7 @@ body {
                     <h3>Keyword list <!-- <span id="input_counter">0</span> words --></h3>
                     <textarea id="paste_keyword_list" placeholder="Paste your keyword list here..." rows="10" cols="40"></textarea>
                     <br>
-                    <h3>Exclude</h3>
+                    <h3>Catch list </h3>
                     <textarea id="paste_blacklist" placeholder="Paste your blacklist here..." rows="10" cols="40"></textarea>
                     <br>
                     <br>
@@ -99,8 +105,17 @@ body {
             </div>
 
             <div class="right content">
-                <h3>Output: <span id="output_counter">0</span> words</h3>
-                <textarea id="output_catcher" placeholder="Output lands here..." rows="25" cols="60"></textarea>
+                <div class="output_list" >
+                    <h3>Matching cases: <span id="output_counter">0</span> words</h3>
+                <textarea id="match_list"  placeholder="Matching cases land here..." rows="25" cols="30"></textarea>
+                </div>
+
+                <div class="output_list">
+                    <h3>Remainder: <span id="output_counter">0</span> words</h3>
+                    <textarea id="remainder_list" placeholder="Remainder of keywords lands here..." rows="25" cols="30"></textarea>
+                </div>
+                
+                
             </div>
           </div> <!--end of container -->
         <br>
