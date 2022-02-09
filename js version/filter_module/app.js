@@ -117,7 +117,9 @@ function remove_duplicates(input){
 
     // Loop over the input, and this time remove all duplicates from it
     var unique_vals = [...new Set(input)];
-    var unique_length = unique_vals.length;  
+    var unique_length = unique_vals.length;
+
+    
 
     return {
         num_individual_keys_removed: `${duplicates.length}`,
@@ -155,7 +157,7 @@ function inList(keyword, blacklist = [], matches_only = false){
                 console.log("loose mode ran")
                 // If match, return true
                 return true;
-            }
+            } 
 
         }
 
