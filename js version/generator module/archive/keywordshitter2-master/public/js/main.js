@@ -479,7 +479,6 @@ var KWS = function(){
         },
 
         init: function(){
-            // this.setUpDb();
 
             // add this.servicess to search engine settings
             for (var service in this.services) {
@@ -620,10 +619,11 @@ var KWS = function(){
                 // scroller:       true
             });
 
-            // get user ip
-            $.getJSON('https://api.ipify.org?format=json', function (data) {
-                this.myIp = data.ip;
-            });
+            // Extract this for shay-lib
+            // // get user ip
+            // $.getJSON('https://api.ipify.org?format=json', function (data) {
+            //     this.myIp = data.ip;
+            // });
 
         }
     };
