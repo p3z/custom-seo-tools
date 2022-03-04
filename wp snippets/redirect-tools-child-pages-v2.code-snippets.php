@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Redirect: Tools - Child pages
+ * Redirect: Tools - Child pages v2
  *
  * Protects the tool routes from those who don't have an active subscription
  */
@@ -36,61 +36,16 @@ add_action( 'redirect_router_config_tools_child', function() use ($tools_args) {
 			
 			// Is child page, so check if user has a subscription
 			if($user !== 0){ // THey need to be logged in to do this
-			
-
-				$customer_orders = [];
-				$orders = wc_get_orders(['customer_id' => $user]);
-
-				foreach ( $orders as $order ) {
-					$order_num = $order->get_id();
-
-					array_push($customer_orders, $order_num); // $customer_orders now contains all this users orders.
-				}
-
-				// Now get active subscriptions
-				$active_subscription_ids = get_posts( [
-				'post_type'      => 'sumosubscriptions',
-				'post_status'    => 'publish',
-				'posts_per_page' => -1,
-				'fields'         => 'ids',
-				'meta_query'     => [
-					'relation' => 'AND',
-						array(
-						'key'     => 'sumo_get_status',
-						'value'   => array( 'Active' ),
-						'compare' => 'IN',
-						),
-					],
-				] ) ;
-			
-			
-				$active_orders = [];
-				foreach ( $active_subscription_ids as $i => $subscription_id ) {
-
-					// Now get orders associated with active subscriptions
-					$assoc_order_id = get_post_meta( $subscription_id, 'sumo_get_parent_order_id', true ) ;
-					array_push($active_orders, $assoc_order_id); // $active orders now contains only active orders
-
-					echo "--------------------------<br>";
-
-				} // End loop
 				
-				// Finally see if any of customers orders are active!
-				$compare = array_intersect($customer_orders, $active_orders);
-				$matches = count($compare);
-				
-				if($matches === 0){
-					// User does not have an active subscription (bounce 'em back)
-					
+				// If active subscription, let ' em through, else bounce 'em back
+				if ( count( sumosubs_get_subscriptions_by_user( $user , 'Active', 1 ) ) ) {
+					return;
+				} else {
 					wp_redirect( home_url( "/my-account/#subscription_required" ) );
 					//	exit(); // always exit
 					exit;
-					
-				} else {
-					// User has active subscription, let 'em in
-					return;
 				}
-			
+		
 			
 			} else{	// User not logged in, bounce 'em back
 				
@@ -101,15 +56,9 @@ add_action( 'redirect_router_config_tools_child', function() use ($tools_args) {
 			}
 	
 		
-			
-		//	echo "Active orders:";
-		//	print_r($active_orders);
-		//	echo "<br>";
-		//	echo "Current user's orders:";
-		//	print_r($customer_orders);
 				
 		
-		} 
+		} // End overview page check
 		
 	} // end if
 
