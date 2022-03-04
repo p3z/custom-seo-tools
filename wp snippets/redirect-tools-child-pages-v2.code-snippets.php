@@ -26,6 +26,11 @@ add_action( 'redirect_router_config_tools_child', function() use ($tools_args) {
 	$condition_value = $tools_args['condition'][1];
 	$user = $tools_args['user'];
 	
+	// Check if we're editing with Oxy
+	if (strpos($_SERVER['REQUEST_URI'], 'ct_builder') !== false) {
+		return;
+	}
+	
 	
 
 	// Check if we're on a tools page
@@ -62,35 +67,7 @@ add_action( 'redirect_router_config_tools_child', function() use ($tools_args) {
 		
 	} // end if
 
-	
-	
-	
-	// Unfinished -> Fix for oxygen builder to prevent accidental redirects 	
-//	if (strpos(['REQUEST_URI'], 'ct_builder') !== false) {
-//   		return;
-//	} else{
-////		echo "<h1> Not oxygen page! </h1>";
-//	}
-	
-	// If current page is 'tools', check if it's a child page
-	if($check_page === 'tools'){
 		
-		
-		
-		// Need to handle oxygen (its currently redirecting when signed in as admin when trying to use oxygen)
-		// ?ct_builder=true&ct_inner=true
-		
-		if($condition_key !== $condition_value){ // Only redirect those who don't meet the value
-			
-			
-			
-		//	wp_redirect( home_url( $redirect_to ) ); //manage-subscription/
-		//	exit(); // always exit
-			
-		}
-		
-	}
-	
 
 });
 
